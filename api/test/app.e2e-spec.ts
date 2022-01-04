@@ -2,6 +2,7 @@ import {Test, TestingModule} from '@nestjs/testing';
 import {INestApplication} from '@nestjs/common';
 import * as request from 'supertest';
 import {AppModule} from './../src/app.module';
+import { PrismaClient } from '@prisma/client';
 
 describe('AppController (e2e)', () => {
     let app: INestApplication;
@@ -13,6 +14,11 @@ describe('AppController (e2e)', () => {
 
         app = moduleFixture.createNestApplication();
         await app.init();
+
+        // ここで接続するデータベースを切り替える必要がある
+        const prisma = new PrismaClient()
+        await prisma.post.deleteMany()
+        await prisma.user.deleteMany()
     });
 
     it('/user Post ', () => {
