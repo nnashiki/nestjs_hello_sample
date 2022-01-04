@@ -15,7 +15,7 @@ describe('AppController (e2e)', () => {
         app = moduleFixture.createNestApplication();
         await app.init();
 
-        // ここで接続するデータベースを切り替える必要がある
+        // todo: ここで接続するデータベースを切り替える必要がある
         const prisma = new PrismaClient()
         await prisma.post.deleteMany()
         await prisma.user.deleteMany()
